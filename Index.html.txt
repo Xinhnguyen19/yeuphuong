@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Mã QR Tình Yêu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body, html {
+margin: 0;
+padding: 0;
+overflow: hidden;
+background: black;
+font-family: sans-serif;
+}
+
+.container {
+position: relative;
+width: 100vw;
+height: 100vh;
+overflow: hidden;
+}
+
+#text-layer {
+position: absolute;
+width: 100%;
+height: 100%;
+color: white;
+text-align: center;
+animation: moveText 20s linear infinite;
+font-size: 1.5em;
+opacity: 0.8;
+}
+
+#text-layer p {
+margin: 30px 0;
+text-shadow: 0 0 10px #fff;
+}
+
+@keyframes moveText {
+0% { transform: translateY(100%); }
+100% { transform: translateY(-100%); }
+}
+
+#heart-canvas {
+position: absolute;
+top: 0;
+left: 0;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div id="text-layer">
+<p>Cảm ơn vì em đã đến</p>
+<p>Làm người yêu anh nhé</p>
+<p>Anh yêu em nhiều lắm</p>
+<p>Anh sẽ luôn bên cạnh em</p>
+</div>
+<canvas id="heart-canvas"></canvas>
+</div>
+
+<script>
+const canvas = document.getElementById("heart-canvas");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const hearts = [];
+
+function createHeart() {
+return {
+x: Math.random() * canvas.width,
+y: -20,
+size: 20 + Math.random() * 10,
+speed: 1 + Math.random() * 3,
+opacity: Math.random(),
+};
+}
+
+function drawHeart(heart) {
+ctx.beginPath();
+ctx.font = `${heart.size}px Arial`;
+ctx.globalAlpha = heart.opacity;
+ctx.fillStyle = "red";
+ctx.fillText("❤️", heart.x, heart.y);
+ctx.globalAlpha = 1.0;
+}
+
+function animate() {
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+if (Math.random() < 0.1) {
+hearts.push(createHeart());
+}
+
+for (let i = 0; i < hearts.length; i++) {
+const h = hearts[i];
+h.y += h.speed;
+drawHeart(h);
+}
+
+for (let i = hearts.length - 1; i >= 0; i--) {
+if (hearts[i].y > canvas.height) {
+hearts.splice(i, 1);
+}
+}
+
+requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+</body>
+</html>
