@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>I love you 💋</title>
+<style>
+/* Nền không gian 3D */
+body {
+margin: 0;
+padding: 0;
+overflow: hidden;
+background: radial-gradient(circle at center, #000000 0%, #0a0a23 100%);
+color: #ff69b4;
+font-family: 'Arial', sans-serif;
+perspective: 1000px;
+}
+
+.content {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%) rotateX(10deg);
+text-align: center;
+animation: float 10s ease-in-out infinite;
+}
+
+h1, h2, p {
+animation: glow 2s ease-in-out infinite alternate;
+text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4;
+margin: 10px;
+}
+
+h1 { font-size: 40px; }
+h2 { font-size: 28px; color: #00ffff; }
+p { font-size: 24px; }
+
+@keyframes glow {
+from {
+text-shadow: 0 0 5px #ff69b4;
+}
+to {
+text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff1493;
+}
+}
+
+@keyframes float {
+0% { transform: translate(-50%, -50%) rotateX(10deg); }
+50% { transform: translate(-50%, -55%) rotateX(15deg); }
+100% { transform: translate(-50%, -50%) rotateX(10deg); }
+}
+
+/* Trái tim rơi */
+.heart {
+width: 15px;
+height: 15px;
+position: fixed;
+top: -10px;
+background: pink;
+transform: rotate(45deg);
+animation: fall 5s linear infinite;
+z-index: 0;
+}
+
+.heart::before,
+.heart::after {
+content: '';
+width: 15px;
+height: 15px;
+background: pink;
+position: absolute;
+border-radius: 50%;
+}
+
+.heart::before {
+top: -7.5px;
+left: 0;
+}
+
+.heart::after {
+left: -7.5px;
+top: 0;
+}
+
+@keyframes fall {
+to {
+transform: translateY(100vh) rotate(360deg);
+}
+}
+</style>
+</head>
+<body>
+
+<div class="content">
+<h1>I love you 💋</h1>
+<p>Mãi yêu Phương 😘</p>
+<h2>Bảo bối yêu ơi 🩵</h2>
+<p>03/04/2025</p>
+<p>Yêu Phương nhất trên đời 🫶</p>
+<p>My love 😍</p>
+<p>Hoài Phương 🥰🥰🥰</p>
+</div>
+
+<!-- Tạo nhiều trái tim rơi -->
+<script>
+for (let i = 0; i < 50; i++) {
+let heart = document.createElement('div');
+heart.className = 'heart';
+heart.style.left = Math.random() * 100 + "vw";
+heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+heart.style.opacity = Math.random();
+document.body.appendChild(heart);
+}
+</script>
+
+</body>
+</html>
